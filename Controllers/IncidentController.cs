@@ -23,16 +23,16 @@ namespace IncidentReport.Controllers
 
         // GET: api/Incident
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Incident>>> GetIncidents()
+        public async Task<ActionResult<IEnumerable<IncidentCase>>> GetIncidents()
         {
-            return await _context.Incidents.ToListAsync();
+            return await _context.IncidentCases.ToListAsync();
         }
 
         // GET: api/Incident/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Incident>> GetIncident(long id)
+        public async Task<ActionResult<IncidentCase>> GetIncident(long id)
         {
-            var incident = await _context.Incidents.FindAsync(id);
+            var incident = await _context.IncidentCases.FindAsync(id);
 
             if (incident == null)
             {
@@ -45,14 +45,14 @@ namespace IncidentReport.Controllers
         // PUT: api/Incident/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutIncident(long id, Incident incident)
+        public async Task<IActionResult> PutIncident(long id, IncidentCase IncidentCase)
         {
-            if (id != incident.Id)
+            if (id != IncidentCase.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(incident).State = EntityState.Modified;
+            _context.Entry(IncidentCase).State = EntityState.Modified;
 
             try
             {
@@ -76,25 +76,25 @@ namespace IncidentReport.Controllers
         // POST: api/Incident
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Incident>> PostIncident(Incident incident)
+        public async Task<ActionResult<IncidentCase>> PostIncident(IncidentCase incidentcase)
         {
-            _context.Incidents.Add(incident);
+            _context.IncidentCases.Add(incidentcase);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetIncident", new { id = incident.Id }, incident);
+            return CreatedAtAction("GetIncident", new { id = incidentcase.Id }, incidentcase);
         }
 
         // DELETE: api/Incident/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteIncident(long id)
         {
-            var incident = await _context.Incidents.FindAsync(id);
+            var incident = await _context.IncidentCases.FindAsync(id);
             if (incident == null)
             {
                 return NotFound();
             }
 
-            _context.Incidents.Remove(incident);
+            _context.IncidentCases.Remove(incident);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -102,7 +102,7 @@ namespace IncidentReport.Controllers
 
         private bool IncidentExists(long id)
         {
-            return _context.Incidents.Any(e => e.Id == id);
+            return _context.IncidentCases.Any(e => e.Id == id);
         }
     }
 }
