@@ -6,6 +6,8 @@ namespace IncidentReport.Model;
 
 public class IncidentCase{
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Required]
     [Column("Id")]
     public long Id{get; set;}
     
