@@ -33,8 +33,12 @@ public class TemporaryDbContextFactory : IDesignTimeDbContextFactory<IncidentRep
     public IncidentReportIdentityDbContext CreateDbContext(string[] args)
     {
         var builder = new DbContextOptionsBuilder<IncidentReportIdentityDbContext>();
-        builder.UseSqlServer("DebstarConnection",
-        optionsBuilder => optionsBuilder.MigrationsAssembly(typeof(IncidentReportIdentityDbContext).GetTypeInfo().Assembly.GetName().Name));
+        //var connectionString = builder.GetConnectionString("debstar");
+        string connectionString = "server=192.168.0.107;database=dotnetAPI;user=knutekje;password=hore23;";
+ //nd it works. For MySQL use "builder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
+        builder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
+        options => options.MigrationsAssembly(typeof(IncidentReportIdentityDbContext).GetTypeInfo().Assembly.GetName().Name));
         return new IncidentReportIdentityDbContext(builder.Options);
     }
 }
+

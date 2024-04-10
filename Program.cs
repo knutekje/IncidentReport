@@ -14,11 +14,13 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<IncidentContext>(options =>
 {
-    var connectionString = builder.Configuration.GetConnectionString("DebstarConnection");
+    var connectionString = builder.Configuration.GetConnectionString("debstar");
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<IncidentReportIdentityDbContext>();
+/* builder.Services.AddDefaultIdentity<IdentityUser>(options => 
+options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<IncidentReportIdentityDbContext>(); */
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -31,6 +33,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
