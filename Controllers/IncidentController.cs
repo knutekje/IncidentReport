@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using IncidentReport.Data;
 using IncidentReport.Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IncidentReport.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class IncidentController : ControllerBase
     {
         private readonly IncidentContext _context;
