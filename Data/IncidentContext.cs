@@ -33,7 +33,7 @@ public class TemporaryDbContextFactory : IDesignTimeDbContextFactory<IncidentCon
     {
         
         var builder = new DbContextOptionsBuilder<IncidentContext>();
-        string connectionString = "server=192.168.0.107;database=dotnetAPI;user=knutekje;password=hore23;";
+        string connectionString = "server=192.168.100.103;database=dotnetAPI;user=knutekje;password=hore23;";
         builder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString),
         options => options.MigrationsAssembly(typeof(IncidentContext).GetTypeInfo().Assembly.GetName().Name));
         return new IncidentContext(builder.Options);
